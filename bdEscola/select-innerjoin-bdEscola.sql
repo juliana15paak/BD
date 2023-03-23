@@ -22,7 +22,7 @@ SELECT COUNT (codMatricula) AS 'Quantidade de alunos matriculados', nomeCurso
 	GROUP BY nomeCurso
 
 --Apresentar a quantidade de alunos matriculados por nome da turma
-SELECT COUNT (codMatricula) AS 'Quantidade de aluno matriculados', nomeTurma
+SELECT COUNT (codMatricula) AS 'Quantidade de alunos matriculados', nomeTurma
 	FROM tbMatricula
 	INNER JOIN tbAluno
 	ON tbMatricula.codAluno = tbAluno.codAluno
@@ -36,7 +36,7 @@ SELECT COUNT (codMatricula) AS 'Quantidade de alunos que se matricularam', dataM
 	WHERE MONTH (dataMatricula) = 5 AND YEAR (dataMatricula) = 2016
 	GROUP BY dataMatricula
 
---Apresentar o nome dos alunos em ordem alfabÈtica ao lado do nome das turmas e os nomes dos cursos em que est„o matriculados
+--Apresentar o nome dos alunos em ordem alfab√©tica ao lado do nome das turmas e os nomes dos cursos em que est√£o matriculados
 SELECT nomeAluno, nomeTurma, nomeCurso
 	FROM tbMatricula
 	INNER JOIN tbAluno
@@ -47,7 +47,7 @@ SELECT nomeAluno, nomeTurma, nomeCurso
 	ON tbTurma.codCurso = tbCurso.codCurso
 	ORDER BY nomeAluno
 
---*Apresentar o nome dos cursos e os hor·rios em que eles s„o oferecidos
+--*Apresentar o nome dos cursos e os hor√°rios em que eles s√£o oferecidos
 SELECT nomeCurso, horarioTurma
 	CONVERT(VARCHAR(12), horarioTurma, 114)
 	FROM tbTurma
@@ -66,7 +66,7 @@ SELECT COUNT(codAluno) AS 'Quantidade de alunos matriculados', naturalidadeAluno
 	WHERE codCurso = 1
 	GROUP BY naturalidadeAluno
 	
---*Apresentar o nome dos alunos ao lado da data de matrÌcula no formato dd/mm/aaaa
+--*Apresentar o nome dos alunos ao lado da data de matr√≠cula no formato dd/mm/aaaa
 SELECT nomeAluno, dataMatricula
 	CONVERT (VARCHAR(10), dataMatricula, 103)
 	FROM tbMatricula
