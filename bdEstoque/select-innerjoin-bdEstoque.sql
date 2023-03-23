@@ -1,61 +1,60 @@
-use bdEstoque
+USE bdEstoque
 
-select codProduto, descricaoProduto, valorProduto, nomeFabricante
+SELECT codProduto, descricaoProduto, valorProduto, nomeFabricante
 	FROM tbProduto
 	 INNER JOIN tbFabricante
 	 ON tbProduto.codFabricante = tbFabricante.codFabricante 
 
-select codProduto, descricaoProduto, valorProduto, nomeFornecedor 
+SELECT codProduto, descricaoProduto, valorProduto, nomeFornecedor 
 	FROM tbProduto
 	INNER JOIN tbFornecedor
 	ON tbProduto.codFornecedor = tbFornecedor.codFornecedor 
 
-SELECT SUM quantidadeProduto
+SELECT SUM (quantidadeProduto) AS 'Quantidade de Produto', nomeFabricante
 	FROM tbProduto
-	GROUP BY nomeFabricante
 	INNER JOIN tbFabricante
 	ON tbProduto.codFabricante = tbFabricante.codFabricante
-
+	GROUP BY nomeFabricante
+	
 SELECT valorTotalVenda, nomeCliente
 	FROM tbVenda
 	INNER JOIN tbCliente
 	ON tbVenda.codCliente = tbCliente.codCliente
 
-SELECT AVG valorProduto
+SELECT AVG (valorProduto) AS 'Média dos valores dos produtos', nomeFornecedor
 	FROM tbProduto
-	GROUP BY nomeFornecedor
 	INNER JOIN tbFornecedor
 	ON tbProduto.codFornecedor = tbFornecedor.codFornecedor
+	GROUP BY nomeFornecedor
 
-SELECT SUM valotTotalVenda
+SELECT SUM (valorTotalVenda) AS 'Valor total da venda', nomeCliente
 	FROM tbVenda
+	INNER JOIN tbCliente
+	ON tbVenda.codCliente = tbCliente.codCliente
 	GROUP BY nomeCliente
 	ORDER BY nomeCliente
-	INNER JOIN tbCliente
-	ON tbVenda.codCliente = tbCliente.codCliente
 
-SELECT SUM valorProduto
+SELECT SUM (valorProduto) AS 'Soma do valor dos Produtos', nomeFabricante
 	FROM tbProduto
-	GROUP BY nomeFabricante
 	INNER JOIN tbFabricante
 	ON tbProduto.codFabricante = tbFabricante.codFabricante
+	GROUP BY nomeFabricante
 
-SELECT AVG valorProduto
+SELECT AVG (valorProduto) AS 'Média dos valores dos Produtos', nomeFornecedor
 	FROM tbProduto
-	GROUP BY nomeFornecedor
 	INNER JOIN tbFornecedor
-	ON tbProduto.codFornecedor = tbFornecedor.codFornrcedor
+	ON tbProduto.codFornecedor = tbFornecedor.codFornecedor
+	GROUP BY nomeFornecedor
 
-SELECT SUM valorTotalVenda 
-	FROM tbVenda
-	GROUP BY nomeProduto
+SELECT SUM (subTotalItensVenda) AS 'Soma do valor total da venda', descricaoProduto
+	FROM tbItensVenda
 	INNER JOIN tbProduto
-	ON tbVenda.codProduto = tbProduto.codProduto
+	ON tbItensVenda.codProduto = tbProduto.codProduto
+	GROUP BY descricaoProduto
 
-SELECT SUM valorTotalVenda
+SELECT SUM (valorTotalVenda) AS 'Soma das vendas', nomeCliente, dataVenda
 	FROM tbVenda
-	GROUP BY nomeCliente
-	WHERE YEAR (dataVenda) = 2014
-	WHERE MONTH (dataVenda) = 2
 	INNER JOIN tbCliente
 	ON tbVenda.codCliente = tbCliente.codCliente
+	WHERE YEAR (dataVenda) = 2014 AND MONTH (dataVenda) = 2
+	GROUP BY nomeCliente
